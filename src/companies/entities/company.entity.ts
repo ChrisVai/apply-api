@@ -6,14 +6,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { CompanyModel } from '../model/companyModel';
-import { ApplicationModel } from '../../applications/model/applicationModel';
-import { RecruiterModel } from '../../recruiters/model/recruiterModel';
 import { Recruiter } from '../../recruiters/entities/recruiter.entity';
 import { Application } from '../../applications/entities/application.entity';
 
 @Entity()
-export class Company implements CompanyModel {
+export class Company {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,11 +28,11 @@ export class Company implements CompanyModel {
 
   @ManyToMany(() => Recruiter, (recruiter: Recruiter) => recruiter.companies)
   @JoinTable()
-  recruiters: RecruiterModel[];
+  recruiters: Recruiter[];
 
   @OneToMany(
     () => Application,
-    (application: Application) => application.Company,
+    (application: Application) => application.company,
   )
-  applications: ApplicationModel[];
+  applications: Application[];
 }

@@ -1,8 +1,7 @@
-import { RecruiterModel } from '../model/recruiterModel';
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Company } from '../../companies/entities/company.entity';
 @Entity()
-export class Recruiter implements RecruiterModel {
+export class Recruiter {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,5 +18,5 @@ export class Recruiter implements RecruiterModel {
   linkedInUrl: string;
 
   @ManyToMany(() => Company, (company: Company) => company.recruiters)
-  companies: [];
+  companies: Company[];
 }

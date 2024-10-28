@@ -1,18 +1,14 @@
-import {
-  ApplicationModel,
-  RecruiterResponse,
-  Status,
-} from '../model/applicationModel';
+import { RecruiterResponse, Status } from '../model/applicationModel';
 import { User } from '../../users/entities/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Company } from '../../companies/entities/company.entity';
 @Entity()
-export class Application implements ApplicationModel {
+export class Application {
   @PrimaryGeneratedColumn()
   id: number;
 
   @ManyToOne(() => Company, (company) => company.applications)
-  Company: Company;
+  company: Company;
 
   @Column({ nullable: true })
   offerUrl: string;
