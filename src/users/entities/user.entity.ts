@@ -1,4 +1,3 @@
-import { ApplicationModel } from '../../applications/model/applicationModel';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Application } from '../../applications/entities/application.entity';
 import { Exclude } from 'class-transformer';
@@ -8,10 +7,10 @@ export class User {
   id: number;
 
   @Column({ nullable: true })
-  firstName: string;
+  firstName?: string;
 
   @Column({ nullable: true })
-  lastName: string;
+  lastName?: string;
 
   @Column()
   email: string;

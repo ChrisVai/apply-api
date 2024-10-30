@@ -1,5 +1,4 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { Application } from '../../applications/entities/application.entity';
 
 export class CreateUserDto {
   @IsString()
@@ -15,6 +14,4 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   password: string;
-
-  applications?: Application[];
 }

@@ -23,13 +23,8 @@ export class UsersService {
     if (createUserDto.lastName) {
       user.lastName = createUserDto.lastName;
     }
-    if (createUserDto.applications) {
-      user.applications = createUserDto.applications;
-    } else {
-      user.applications = [];
-    }
 
-    return this.usersRepository.create(user);
+    return this.usersRepository.save(user);
   }
 
   findAll() {
@@ -54,9 +49,7 @@ export class UsersService {
     if (updateUserDto.email) {
       user.password = updateUserDto.password;
     }
-    if (updateUserDto.applications.length > 0) {
-      user.applications = updateUserDto.applications;
-    }
+
     return this.usersRepository.update(id, user);
   }
 
