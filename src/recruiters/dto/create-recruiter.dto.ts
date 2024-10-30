@@ -1,18 +1,25 @@
-import { IsEmail, IsString, IsUrl } from 'class-validator';
-import { Company } from '../../companies/entities/company.entity';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 
 export class CreateRecruiterDto {
   @IsString()
+  @IsOptional()
   firstName?: string;
 
   @IsString()
+  @IsOptional()
   lastName?: string;
 
   @IsEmail()
+  @IsNotEmpty
   email: string;
 
   @IsUrl()
+  @IsOptional()
   linkedInUrl?: string;
-
-  companies: Company[];
 }

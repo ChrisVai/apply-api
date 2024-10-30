@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
-import { Recruiter } from '../../recruiters/entities/recruiter.entity';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateCompanyDto {
   @IsString()
@@ -7,13 +6,14 @@ export class CreateCompanyDto {
   name: string;
 
   @IsString()
+  @IsOptional()
   websiteUrl?: string;
 
   @IsString()
+  @IsOptional()
   postalAddress?: string;
 
   @IsString()
+  @IsOptional()
   emailContactAddress?: string;
-
-  recruiters?: Recruiter[];
 }

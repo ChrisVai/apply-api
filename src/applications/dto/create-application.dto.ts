@@ -1,25 +1,34 @@
 import { RecruiterResponse, Status } from '../model/applicationModel';
-import { User } from '../../users/entities/user.entity';
-import { Company } from '../../companies/entities/company.entity';
-import { IsBoolean, IsDate, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsDateString,
+  IsNotEmpty,
+  IsOptional,
+  IsUrl,
+} from 'class-validator';
 
 export class CreateApplicationDto {
-  @IsString()
+  @IsUrl()
+  @IsOptional()
   offerUrl?: string;
 
   @IsBoolean()
+  @IsOptional()
   applied?: boolean;
 
-  @IsDate()
+  @IsDateString()
+  @IsOptional()
   appliedOn?: Date;
 
+  @IsOptional()
   recruiterResponse?: RecruiterResponse;
 
+  @IsOptional()
   status?: Status;
 
   @IsNotEmpty()
-  user: User;
+  userId: number;
 
   @IsNotEmpty()
-  company: Company;
+  companyId: number;
 }
