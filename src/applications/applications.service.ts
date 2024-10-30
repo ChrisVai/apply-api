@@ -12,52 +12,22 @@ export class ApplicationsService {
     private applicationRepository: Repository<Application>,
   ) {}
   create(createApplicationDto: CreateApplicationDto) {
-    const application: Application = new Application();
-
-    application.user = createApplicationDto.user;
-    application.company = createApplicationDto.company;
-
-    if (createApplicationDto.offerUrl) {
-      application.offerUrl = createApplicationDto.offerUrl;
-    }
-    if (createApplicationDto.applied) {
-      application.applied = createApplicationDto.applied;
-    }
-    if (createApplicationDto.appliedOn) {
-      application.appliedOn = createApplicationDto.appliedOn;
-    }
-    return this.applicationRepository.create(application);
+    return this.applicationRepository.save(createApplicationDto);
   }
 
   findAll() {
-    return `This action returns all applications`;
+    return this.applicationRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} application`;
+    return this.applicationRepository.findOneBy({ id });
   }
 
   update(id: number, updateApplicationDto: UpdateApplicationDto) {
-    const application = new Application();
-    if (updateApplicationDto.user) {
-      application.user = updateApplicationDto.user;
-    }
-    if (updateApplicationDto.company) {
-      application.company = updateApplicationDto.company;
-    }
-    if (updateApplicationDto.offerUrl) {
-      application.offerUrl = updateApplicationDto.offerUrl;
-    }
-    if (updateApplicationDto.applied) {
-      application.applied = updateApplicationDto.applied;
-    }
-    if (updateApplicationDto.appliedOn) {
-      application.appliedOn = updateApplicationDto.appliedOn;
-    }
-    return `This action updates a #${id} application`;
+    return this.applicationRepository.update(+id, updateApplicationDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} application`;
+    return this.applicationRepository.delete(id);
   }
 }

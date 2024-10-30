@@ -12,19 +12,7 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
   create(createUserDto: CreateUserDto) {
-    const user: User = new User();
-
-    user.email = createUserDto.email;
-    user.password = createUserDto.password;
-
-    if (createUserDto.firstName) {
-      user.firstName = createUserDto.firstName;
-    }
-    if (createUserDto.lastName) {
-      user.lastName = createUserDto.lastName;
-    }
-
-    return this.usersRepository.save(user);
+    return this.usersRepository.save(createUserDto);
   }
 
   findAll() {
@@ -36,21 +24,7 @@ export class UsersService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    const user: User = new User();
-    if (updateUserDto.firstName) {
-      user.firstName = updateUserDto.firstName;
-    }
-    if (updateUserDto.lastName) {
-      user.lastName = updateUserDto.lastName;
-    }
-    if (updateUserDto.email) {
-      user.email = updateUserDto.email;
-    }
-    if (updateUserDto.email) {
-      user.password = updateUserDto.password;
-    }
-
-    return this.usersRepository.update(id, user);
+    return this.usersRepository.update(id, updateUserDto);
   }
 
   remove(id: number) {

@@ -12,59 +12,22 @@ export class CompaniesService {
     private companyRepository: Repository<Company>,
   ) {}
   create(createCompanyDto: CreateCompanyDto) {
-    const company: Company = new Company();
-
-    company.name = createCompanyDto.name;
-
-    if (createCompanyDto.websiteUrl) {
-      company.websiteUrl = createCompanyDto.websiteUrl;
-    }
-    if (createCompanyDto.postalAddress) {
-      company.postalAddress = createCompanyDto.postalAddress;
-    }
-    if (createCompanyDto.emailContactAddress) {
-      company.emailContactAddress = createCompanyDto.emailContactAddress;
-    }
-    if (createCompanyDto.recruiters) {
-      company.recruiters = createCompanyDto.recruiters;
-    } else {
-      company.recruiters = [];
-    }
-
-    return this.companyRepository.create(company);
+    return this.companyRepository.save(createCompanyDto);
   }
 
   findAll() {
-    return `This action returns all companies`;
+    return this.companyRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} company`;
+    return this.companyRepository.findOneBy({ id });
   }
 
   update(id: number, updateCompanyDto: UpdateCompanyDto) {
-    const company = new Company();
-    if (updateCompanyDto.name) {
-      company.name = updateCompanyDto.name;
-    }
-    if (updateCompanyDto.websiteUrl) {
-      company.websiteUrl = updateCompanyDto.websiteUrl;
-    }
-    if (updateCompanyDto.postalAddress) {
-      company.postalAddress = updateCompanyDto.postalAddress;
-    }
-    if (updateCompanyDto.emailContactAddress) {
-      company.emailContactAddress = updateCompanyDto.postalAddress;
-    }
-    if (updateCompanyDto.recruiters) {
-      for (const recruiter of updateCompanyDto.recruiters) {
-        company.recruiters.push(recruiter);
-      }
-    }
-    return this.companyRepository.update(id, company);
+    return this.companyRepository.update(id, updateCompanyDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} company`;
+    return this.companyRepository.delete(id);
   }
 }
