@@ -16,7 +16,7 @@ export class CreateRecruiterDto {
   lastName?: string;
 
   @IsEmail()
-  @IsNotEmpty
+  @IsNotEmpty()
   email: string;
 
   @IsUrl()
