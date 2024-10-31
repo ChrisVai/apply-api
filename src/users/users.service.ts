@@ -26,7 +26,12 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    return this.usersRepository.findOneBy({ id });
+    return this.usersRepository.findOne({
+      where: {
+        id: id,
+      },
+      relations: ['applications', 'applications.company'],
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

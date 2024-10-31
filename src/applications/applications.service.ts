@@ -16,7 +16,9 @@ export class ApplicationsService {
   }
 
   findAll() {
-    return this.applicationRepository.find();
+    return this.applicationRepository.find({
+      relations: ['company'],
+    });
   }
 
   findOne(id: number) {

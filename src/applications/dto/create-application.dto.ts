@@ -6,6 +6,8 @@ import {
   IsOptional,
   IsUrl,
 } from 'class-validator';
+import { User } from '../../users/entities/user.entity';
+import { Company } from '../../companies/entities/company.entity';
 
 export class CreateApplicationDto {
   @IsUrl()
@@ -27,8 +29,8 @@ export class CreateApplicationDto {
   status?: Status;
 
   @IsNotEmpty()
-  userId: number;
+  user: User;
 
   @IsNotEmpty()
-  companyId: number;
+  company: Company;
 }
