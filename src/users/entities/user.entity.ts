@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Application } from '../../applications/entities/application.entity';
-import { Exclude } from 'class-transformer';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -16,7 +15,6 @@ export class User {
   email: string;
 
   @Column()
-  @Exclude()
   password: string;
 
   @OneToMany(() => Application, (application: Application) => application.user)
