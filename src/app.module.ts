@@ -16,6 +16,7 @@ import { Recruiter } from './recruiters/entities/recruiter.entity';
 import { User } from './users/entities/user.entity';
 import { CompaniesController } from './companies/companies.controller';
 import { CompaniesService } from './companies/companies.service';
+import { HashService } from './auth/hash/hash.service';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { CompaniesService } from './companies/companies.service';
     UsersService,
     RecruitersService,
     CompaniesService,
+    HashService,
   ],
 })
 export class AppModule {}
