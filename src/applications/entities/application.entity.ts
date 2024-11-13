@@ -38,4 +38,7 @@ export class Application {
 
   @ManyToOne(() => User, (user: User) => user.applications)
   user: User;
+
+  @Column({ nullable: true })
+  comment: string;
 }
