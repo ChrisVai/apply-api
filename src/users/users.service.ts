@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { HashService } from '../auth/hash/hash.service';
+import e from 'express';
 
 @Injectable()
 export class UsersService {
@@ -31,6 +32,14 @@ export class UsersService {
         id: id,
       },
       relations: ['applications', 'applications.company'],
+    });
+  }
+
+  async findOneByEmail(email: string) {
+    return this.usersRepository.findOne({
+      where: {
+        email: email,
+      },
     });
   }
 
