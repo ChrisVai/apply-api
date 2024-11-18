@@ -5,7 +5,6 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { HashService } from '../auth/hash/hash.service';
-import e from 'express';
 
 @Injectable()
 export class UsersService {

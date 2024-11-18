@@ -11,9 +11,12 @@ export class AuthService {
     private hashService: HashService,
   ) {}
 
-  async validateUser(email: string, pass: string) {
+  async validateUser(email: string, password: string) {
     const user: User = await this.userService.findOneByEmail(email);
-    const isMatch = this.hashService.compareHashedPassword(user.password, pass);
+    const isMatch: Promise<boolean> = this.hashService.compareHashedPassword(
+      user.password,
+      password,
+    );
     if (user && isMatch) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
