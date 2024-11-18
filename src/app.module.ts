@@ -20,6 +20,8 @@ import { HashService } from './auth/hash/hash.service';
 import { AuthModule } from './auth/auth/auth.module';
 import { AuthController } from './auth/auth/auth.controller';
 import { AuthService } from './auth/auth/auth.service';
+import { ConfigModule } from '@nestjs/config';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -33,11 +35,13 @@ import { AuthService } from './auth/auth/auth.service';
       entities: [Application, Company, Recruiter, User],
       synchronize: true,
     }),
+    ConfigModule.forRoot(),
     UsersModule,
     ApplicationsModule,
     RecruitersModule,
     CompaniesModule,
     AuthModule,
+    JwtModule,
   ],
   controllers: [
     ApplicationsController,
@@ -53,6 +57,7 @@ import { AuthService } from './auth/auth/auth.service';
     CompaniesService,
     HashService,
     AuthService,
+    JwtService,
   ],
 })
 export class AppModule {}
