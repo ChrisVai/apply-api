@@ -9,6 +9,8 @@ import { HashService } from '../hash/hash.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { JwtStrategy } from '../jwt.strategy';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from '../guard/jwt-auth';
 
 @Module({
   imports: [
@@ -20,6 +22,10 @@ import { JwtStrategy } from '../jwt.strategy';
     }),
   ],
   providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
     AuthService,
     LocalStrategy,
     JwtStrategy,
