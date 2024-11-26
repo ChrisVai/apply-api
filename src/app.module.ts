@@ -17,6 +17,11 @@ import { User } from './users/entities/user.entity';
 import { CompaniesController } from './companies/companies.controller';
 import { CompaniesService } from './companies/companies.service';
 import { HashService } from './auth/hash/hash.service';
+import { AuthModule } from './auth/auth/auth.module';
+import { AuthController } from './auth/auth/auth.controller';
+import { AuthService } from './auth/auth/auth.service';
+import { ConfigModule } from '@nestjs/config';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -30,16 +35,22 @@ import { HashService } from './auth/hash/hash.service';
       entities: [Application, Company, Recruiter, User],
       synchronize: true,
     }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     UsersModule,
     ApplicationsModule,
     RecruitersModule,
     CompaniesModule,
+    AuthModule,
+    JwtModule,
   ],
   controllers: [
     ApplicationsController,
     UsersController,
     RecruitersController,
     CompaniesController,
+    AuthController,
   ],
   providers: [
     ApplicationsService,
@@ -47,6 +58,8 @@ import { HashService } from './auth/hash/hash.service';
     RecruitersService,
     CompaniesService,
     HashService,
+    AuthService,
+    JwtService,
   ],
 })
 export class AppModule {}
