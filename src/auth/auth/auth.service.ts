@@ -15,11 +15,9 @@ export class AuthService {
 
   async validateUser(email: string, password: string) {
     const user: User = await this.userService.findOneByEmail(email);
-    const isMatch: Promise<boolean> = this.hashService.compareHashedPassword(
-      user.password,
-      password,
-    );
-    if (user && isMatch) {
+    const isPassMatch: Promise<boolean> =
+      this.hashService.compareHashedPassword(user.password, password);
+    if (user && isPassMatch) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
       return result;
@@ -30,7 +28,9 @@ export class AuthService {
   async login(user: User) {
     const payload = { username: user.email, sub: user.id };
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign(payload, {
+        secret: process.env.SECRET,
+      }),
     };
   }
 }

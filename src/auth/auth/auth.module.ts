@@ -7,8 +7,8 @@ import { LocalStrategy } from '../local.strategy';
 import { UsersService } from '../../users/users.service';
 import { HashService } from '../hash/hash.service';
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as process from 'process';
+import { ConfigService } from '@nestjs/config';
+import { JwtStrategy } from '../jwt.strategy';
 
 @Module({
   imports: [
@@ -22,10 +22,12 @@ import * as process from 'process';
   providers: [
     AuthService,
     LocalStrategy,
+    JwtStrategy,
     UsersService,
     HashService,
     ConfigService,
   ],
   controllers: [AuthController],
+  exports: [AuthService],
 })
 export class AuthModule {}

@@ -35,7 +35,9 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
       entities: [Application, Company, Recruiter, User],
       synchronize: true,
     }),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     UsersModule,
     ApplicationsModule,
     RecruitersModule,
