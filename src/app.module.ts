@@ -23,6 +23,7 @@ import { AuthService } from './auth/services/auth-service/auth.service';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { AuthRefreshTokenService } from './auth/services/auth-refresh-token-service/auth-refresh-token.service';
+import { AuthRefreshToken } from './auth/entities/auth-refresh-token.entity';
 
 @Module({
   imports: [
@@ -33,7 +34,7 @@ import { AuthRefreshTokenService } from './auth/services/auth-refresh-token-serv
       username: 'chris',
       password: 'Ferrari-458',
       database: 'apply_db',
-      entities: [Application, Company, Recruiter, User],
+      entities: [Application, Company, Recruiter, User, AuthRefreshToken],
       synchronize: true,
     }),
     ConfigModule.forRoot({

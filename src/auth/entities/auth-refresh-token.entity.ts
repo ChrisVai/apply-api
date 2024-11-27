@@ -1,10 +1,10 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 
-@Entity({ name: 'auth_refresh_tokens' })
+@Entity()
 export class AuthRefreshToken {
-  @PrimaryColumn({ name: 'refresh_token' })
-  refreshToken: string;
+  @PrimaryColumn({ name: 'hashed_refresh_token' })
+  hashedRefreshToken: string;
 
   @Column({ name: 'expires_at' })
   expiresAt: Date;

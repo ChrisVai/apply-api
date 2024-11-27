@@ -4,6 +4,7 @@ import { HashService } from '../../hash/hash.service';
 import { User } from '../../../users/entities/user.entity';
 import { AuthRefreshTokenService } from '../auth-refresh-token-service/auth-refresh-token.service';
 import { UserLoginDto } from '../../../users/dto/user-login.dto';
+import { Response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -30,16 +31,14 @@ export class AuthService {
     }
   }
 
-  async login(user: UserLoginDto) {
+  async login(res: Response, user: UserLoginDto) {
     const fullUser: User = await this.validateUser(user.email, user.password);
 
     if (fullUser) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, ...result } = fullUser;
-      return {
-        tokens: await this.authRefreshTokenService.generateTokenPair(fullUser),
-        currentUser: result,
-      };
+      return await this.authRefreshTokenService.generateTokenPair(
+        fullUser,
+        res,
+      );
     } else {
       throw new UnauthorizedException();
     }
