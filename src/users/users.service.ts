@@ -26,12 +26,16 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    return this.usersRepository.findOne({
-      where: {
-        id: id,
-      },
-      relations: ['applications', 'applications.company'],
-    });
+    if (id && typeof id === 'number') {
+      return this.usersRepository.findOne({
+        where: {
+          id: id,
+        },
+        relations: ['applications', 'applications.company'],
+      });
+    } else {
+      return null;
+    }
   }
 
   async findOneByEmail(email: string) {
