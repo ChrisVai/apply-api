@@ -7,10 +7,7 @@ import { Request } from 'express';
 import { extractRefreshTokenFromCookies } from '../../cookies/cookieConfig';
 
 @Injectable()
-export class JwtRefreshStrategy extends PassportStrategy(
-  Strategy,
-  'jwt-refresh',
-) {
+export class JwtRefreshStrategy extends PassportStrategy(Strategy) {
   constructor(private userService: UsersService) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([

@@ -33,7 +33,6 @@ export class AuthService {
 
   async login(res: Response, user: UserLoginDto) {
     const fullUser: User = await this.validateUser(user.email, user.password);
-
     if (fullUser) {
       return await this.authRefreshTokenService.generateTokenPair(
         fullUser,

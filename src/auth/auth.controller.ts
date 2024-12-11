@@ -8,9 +8,8 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './services/auth-service/auth.service';
 import { Public } from './decorators/public-decorator';
-import { LocalAuthGuard } from './guard/local-auth.guard';
 import { Throttle } from '@nestjs/throttler';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { AuthRefreshTokenService } from './services/auth-refresh-token-service/auth-refresh-token.service';
 import { JwtRefreshAuthGuard } from './guard/jwt-refresh-auth.guard';
 import { JwtAuthGuard } from './guard/jwt-auth.guard';
@@ -19,7 +18,10 @@ import {
   cookieConfig,
   extractRefreshTokenFromCookies,
 } from '../cookies/cookieConfig';
+import { UserLoginDto } from '../users/dto/user-login.dto';
+import { User } from '../users/entities/user.entity';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -31,19 +33,12 @@ export class AuthController {
     short: { limit: 2, ttl: 1000 },
     long: { limit: 5, ttl: 60000 },
   })
+  @ApiBody({ type: UserLoginDto })
   @Public()
   @UseGuards(JwtAuthGuard)
   @Post('login')
   async login(@Request() req, @Res({ passthrough: true }) res: Response) {
-    console.log('la requête arrivée dans login', req.body);
     return this.authService.login(res, req.body);
-  }
-
-  @Public()
-  @UseGuards(LocalAuthGuard)
-  @Post('logout')
-  async logout(@Request() req) {
-    return req.logout();
   }
 
   @Throttle({
@@ -55,19 +50,19 @@ export class AuthController {
   @UseGuards(JwtRefreshAuthGuard)
   @Post('refresh-tokens')
   refreshTokens(@Request() req, @Res({ passthrough: true }) res: Response) {
-    if (!req.user) {
+    if (!req.body) {
       throw new InternalServerErrorException();
     }
     return this.authRefreshTokenService.generateTokenPair(
-      (req.user as any).attributes,
+      req.body as User,
       res,
       extractRefreshTokenFromCookies(req) as string,
-      (req.user as any).refreshTokenExpiresAt,
     );
   }
   @Public()
   @Post('clear-auth-cookie')
   clearAuthCookie(@Res({ passthrough: true }) res: Response) {
+    console.log('passage dans clear auth cookie');
     res.clearCookie(cookieConfig.refreshToken.name);
   }
 }

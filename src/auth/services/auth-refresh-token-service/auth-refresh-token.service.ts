@@ -8,6 +8,7 @@ import { User } from '../../../users/entities/user.entity';
 import { HashService } from '../../hash/hash.service';
 import { Response } from 'express';
 import { cookieConfig } from '../../../cookies/cookieConfig';
+import { UsersService } from '../../../users/users.service';
 
 @Injectable()
 export class AuthRefreshTokenService {
@@ -16,6 +17,7 @@ export class AuthRefreshTokenService {
     private hashService: HashService,
     @InjectRepository(AuthRefreshToken)
     private authRefreshTokenRepository: Repository<AuthRefreshToken>,
+    private userService: UsersService,
   ) {}
 
   async generateRefreshToken(
@@ -24,12 +26,12 @@ export class AuthRefreshTokenService {
     currentRefreshTokenExpiresAt?: Date,
   ) {
     const payload = { sub: authUser.id };
-    const newRefreshToken = this.jwtService.sign(payload, {
+    const newRefreshToken: string = this.jwtService.sign(payload, {
       secret: process.env.JWT_REFRESH_SECRET,
       expiresIn: '30d',
     });
     if (currentRefreshToken && currentRefreshTokenExpiresAt) {
-      const hashedRefreshToken =
+      const hashedRefreshToken: string =
         await this.hashService.hash(currentRefreshToken);
       if (
         await this.isRefreshTokenBlacklisted(hashedRefreshToken, authUser.id)
@@ -62,6 +64,7 @@ export class AuthRefreshTokenService {
     currentRefreshTokenExpiresAt?: Date,
   ) {
     const payload = { sub: user.id };
+    const fullUser: User = await this.userService.findOne(user.id);
     res.cookie(
       cookieConfig.refreshToken.name,
       await this.generateRefreshToken(
@@ -77,6 +80,7 @@ export class AuthRefreshTokenService {
       access_token: this.jwtService.sign(payload, {
         secret: process.env.JWT_SECRET,
       }),
+      currentUser: fullUser,
     };
   }
 }
