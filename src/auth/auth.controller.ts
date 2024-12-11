@@ -62,7 +62,6 @@ export class AuthController {
   @Public()
   @Post('clear-auth-cookie')
   clearAuthCookie(@Res({ passthrough: true }) res: Response) {
-    console.log('passage dans clear auth cookie');
     res.clearCookie(cookieConfig.refreshToken.name);
   }
 }
