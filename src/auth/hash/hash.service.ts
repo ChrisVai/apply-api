@@ -12,4 +12,9 @@ export class HashService {
   async compareHashedPassword(password1: string, password2: string) {
     return await bcrypt.compare(password1, password2);
   }
+
+  async hash(string: string) {
+    const salt = await bcrypt.genSalt(this.saltOrRounds);
+    return await bcrypt.hash(string, salt);
+  }
 }

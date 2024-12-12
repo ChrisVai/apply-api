@@ -17,11 +17,13 @@ import { User } from './users/entities/user.entity';
 import { CompaniesController } from './companies/companies.controller';
 import { CompaniesService } from './companies/companies.service';
 import { HashService } from './auth/hash/hash.service';
-import { AuthModule } from './auth/auth/auth.module';
-import { AuthController } from './auth/auth/auth.controller';
-import { AuthService } from './auth/auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/services/auth-service/auth.service';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule, JwtService } from '@nestjs/jwt';
+import { AuthRefreshTokenService } from './auth/services/auth-refresh-token-service/auth-refresh-token.service';
+import { AuthRefreshToken } from './auth/entities/auth-refresh-token.entity';
 
 @Module({
   imports: [
@@ -32,7 +34,7 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
       username: 'chris',
       password: 'Ferrari-458',
       database: 'apply_db',
-      entities: [Application, Company, Recruiter, User],
+      entities: [Application, Company, Recruiter, User, AuthRefreshToken],
       synchronize: true,
     }),
     ConfigModule.forRoot({
@@ -60,6 +62,7 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
     HashService,
     AuthService,
     JwtService,
+    AuthRefreshTokenService,
   ],
 })
 export class AppModule {}
