@@ -4,6 +4,7 @@ import { UpdateApplicationDto } from './dto/update-application.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Application } from './entities/application.entity';
+import { UserModel } from '../users/model/userModel';
 
 @Injectable()
 export class ApplicationsService {
@@ -21,8 +22,19 @@ export class ApplicationsService {
     });
   }
 
+  findUserApplications(user: UserModel) {
+    return this.applicationRepository.find({
+      where: {
+        user: user,
+      },
+      relations: {
+        company: true,
+      },
+    });
+  }
+
   findOne(id: number) {
-    return this.applicationRepository.findOneBy({ id });
+    return this.applicationRepository.findOneBy({ id: id });
   }
 
   update(id: number, updateApplicationDto: UpdateApplicationDto) {

@@ -31,7 +31,6 @@ export class UsersService {
         where: {
           id: id,
         },
-        relations: ['applications', 'applications.company'],
       });
     } else {
       return null;
