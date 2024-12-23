@@ -14,6 +14,9 @@ export class CreateApplicationDto {
   @IsOptional()
   offerUrl?: string;
 
+  @IsOptional()
+  title: string;
+
   @IsBoolean()
   @IsOptional()
   applied?: boolean;

@@ -7,6 +7,9 @@ export class Application {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ nullable: true })
+  title: string;
+
   @ManyToOne(() => Company, (company) => company.applications)
   company: Company;
 

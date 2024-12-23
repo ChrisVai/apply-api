@@ -15,6 +15,7 @@ export enum Status {
 }
 export interface ApplicationModel {
   id: number;
+  title: string;
   Company: Company;
   offerUrl?: string;
   applied: boolean;
