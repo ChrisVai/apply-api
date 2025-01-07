@@ -21,6 +21,7 @@ export interface ApplicationModel {
   applied: boolean;
   appliedOn?: Date;
   recruiterResponse?: RecruiterResponse;
+  comments?: string;
   status: Status;
   user: User;
 }

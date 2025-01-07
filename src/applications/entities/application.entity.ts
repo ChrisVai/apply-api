@@ -43,5 +43,5 @@ export class Application {
   user: User;
 
   @Column({ nullable: true })
-  comment: string;
+  comments: string;
 }

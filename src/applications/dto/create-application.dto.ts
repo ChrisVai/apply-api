@@ -29,6 +29,9 @@ export class CreateApplicationDto {
   recruiterResponse?: RecruiterResponse;
 
   @IsOptional()
+  comments?: string;
+
+  @IsOptional()
   status?: Status;
 
   @IsNotEmpty()

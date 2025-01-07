@@ -23,6 +23,7 @@ export class ApplicationsController {
 
   @Post()
   create(@Body() createApplicationDto: CreateApplicationDto) {
+    //todo a virer débug
     console.log('passage dans Create Application', createApplicationDto);
     return this.applicationService.create(createApplicationDto);
   }
