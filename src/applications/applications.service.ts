@@ -18,7 +18,7 @@ export class ApplicationsService {
 
   findAll() {
     return this.applicationRepository.find({
-      relations: ['company'],
+      relations: ['company', 'sector'],
     });
   }
 
@@ -29,6 +29,7 @@ export class ApplicationsService {
       },
       relations: {
         company: true,
+        sector: true,
       },
     });
   }

@@ -8,6 +8,7 @@ import {
 } from 'class-validator';
 import { User } from '../../users/entities/user.entity';
 import { Company } from '../../companies/entities/company.entity';
+import { Sector } from '../../sectors/entities/sector.entity';
 
 export class CreateApplicationDto {
   @IsUrl()
@@ -18,7 +19,7 @@ export class CreateApplicationDto {
   title: string;
 
   @IsOptional()
-  category: string;
+  sector?: Sector;
 
   @IsBoolean()
   @IsOptional()

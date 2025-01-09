@@ -24,6 +24,10 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { AuthRefreshTokenService } from './auth/services/auth-refresh-token-service/auth-refresh-token.service';
 import { AuthRefreshToken } from './auth/entities/auth-refresh-token.entity';
+import { SectorsModule } from './sectors/sectors.module';
+import { Sector } from './sectors/entities/sector.entity';
+import { SectorsController } from './sectors/sectors.controller';
+import { SectorsService } from './sectors/sectors.service';
 
 @Module({
   imports: [
@@ -34,7 +38,14 @@ import { AuthRefreshToken } from './auth/entities/auth-refresh-token.entity';
       username: 'chris',
       password: 'Ferrari-458',
       database: 'apply_db',
-      entities: [Application, Company, Recruiter, User, AuthRefreshToken],
+      entities: [
+        Application,
+        Company,
+        Recruiter,
+        User,
+        AuthRefreshToken,
+        Sector,
+      ],
       synchronize: true,
     }),
     ConfigModule.forRoot({
@@ -46,6 +57,7 @@ import { AuthRefreshToken } from './auth/entities/auth-refresh-token.entity';
     CompaniesModule,
     AuthModule,
     JwtModule,
+    SectorsModule,
   ],
   controllers: [
     ApplicationsController,
@@ -53,6 +65,7 @@ import { AuthRefreshToken } from './auth/entities/auth-refresh-token.entity';
     RecruitersController,
     CompaniesController,
     AuthController,
+    SectorsController,
   ],
   providers: [
     ApplicationsService,
@@ -63,6 +76,7 @@ import { AuthRefreshToken } from './auth/entities/auth-refresh-token.entity';
     AuthService,
     JwtService,
     AuthRefreshTokenService,
+    SectorsService,
   ],
 })
 export class AppModule {}

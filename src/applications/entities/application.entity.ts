@@ -1,15 +1,9 @@
 import { RecruiterResponse, Status } from '../model/applicationModel';
 import { User } from '../../users/entities/user.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  Unique,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Company } from '../../companies/entities/company.entity';
+import { Sector } from '../../sectors/entities/sector.entity';
 @Entity()
-@Unique(['category'])
 export class Application {
   @PrimaryGeneratedColumn()
   id: number;
@@ -17,8 +11,8 @@ export class Application {
   @Column({ nullable: true })
   title: string;
 
-  @Column({ nullable: true })
-  category: string;
+  @ManyToOne(() => Sector, (sector) => sector.applications)
+  sector: Sector;
 
   @ManyToOne(() => Company, (company) => company.applications)
   company: Company;
