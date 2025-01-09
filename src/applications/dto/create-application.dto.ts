@@ -17,6 +17,9 @@ export class CreateApplicationDto {
   @IsOptional()
   title: string;
 
+  @IsOptional()
+  category: string;
+
   @IsBoolean()
   @IsOptional()
   applied?: boolean;
