@@ -27,7 +27,7 @@ export class CreateApplicationDto {
 
   @IsDateString()
   @IsOptional()
-  appliedOn?: Date;
+  appliedOn?: string;
 
   @IsOptional()
   recruiterResponse?: RecruiterResponse;
