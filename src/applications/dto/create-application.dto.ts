@@ -26,7 +26,6 @@ export class CreateApplicationDto {
   applied?: boolean;
 
   @IsDateString()
-  @IsOptional()
   appliedOn?: string;
 
   @IsOptional()

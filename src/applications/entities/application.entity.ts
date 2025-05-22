@@ -25,7 +25,6 @@ export class Application {
 
   @Column({
     type: 'datetime',
-    nullable: true,
   })
   appliedOn: Date;
 

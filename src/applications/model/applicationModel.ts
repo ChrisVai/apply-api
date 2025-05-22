@@ -21,7 +21,7 @@ export interface ApplicationModel {
   Company: Company;
   offerUrl?: string;
   applied: boolean;
-  appliedOn?: Date;
+  appliedOn: Date;
   recruiterResponse?: RecruiterResponse;
   comments?: string;
   status: Status;
