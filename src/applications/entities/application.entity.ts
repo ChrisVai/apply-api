@@ -24,6 +24,7 @@ export class Application {
   applied: boolean;
 
   @Column({
+    nullable: true,
     type: 'datetime',
   })
   appliedOn: Date;
