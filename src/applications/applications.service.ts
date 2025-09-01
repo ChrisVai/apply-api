@@ -39,7 +39,7 @@ export class ApplicationsService {
   }
 
   update(id: number, updateApplicationDto: UpdateApplicationDto) {
-    return this.applicationRepository.update(+id, updateApplicationDto);
+    return this.applicationRepository.update(id, updateApplicationDto);
   }
 
   remove(id: number) {

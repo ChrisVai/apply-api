@@ -4,14 +4,12 @@ import {
   IsDateString,
   IsNotEmpty,
   IsOptional,
-  IsUrl,
 } from 'class-validator';
 import { User } from '../../users/entities/user.entity';
 import { Company } from '../../companies/entities/company.entity';
 import { Sector } from '../../sectors/entities/sector.entity';
 
 export class CreateApplicationDto {
-  @IsUrl()
   @IsOptional()
   offerUrl?: string;
 
