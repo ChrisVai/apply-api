@@ -51,7 +51,6 @@ export class ApplicationsController {
     @Param('id') id: string,
     @Body() updateApplicationDto: UpdateApplicationDto,
   ) {
-    console.log('passage dans patch controller', updateApplicationDto);
     return this.applicationService.update(+id, updateApplicationDto);
   }
 
